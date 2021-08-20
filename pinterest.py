@@ -7,9 +7,9 @@ class Pinterest():
     def __init__(self, login, pw):
         self.piclist = []
         options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        options.add_argument('window-size=1920x1080')
-        options.add_argument("disable-gpu")
+        # options.add_argument('headless')
+        # options.add_argument('window-size=1920x1080')
+        # options.add_argument("disable-gpu")
         self.driver = webdriver.Chrome('chromedriver', chrome_options=options)
         try:
             self.driver.get("https://pinterest.com/login")
@@ -44,6 +44,7 @@ class Pinterest():
         self.driver.get(url)
         self.driver.implicitly_wait(3)
         for i in range(n):
+            timeout = 0
             download_pic_count = len(self.piclist)
             print(f"Scroll down {i} Page, downloaded {download_pic_count} images.")
             height = self.driver.execute_script("return document.body.scrollHeight")
@@ -56,7 +57,12 @@ class Pinterest():
                 if now_height != height:
                     self.download_image(dir)
                     break
-                
+                else:
+                    timeout += 1
+                    if timeout >= 10:
+                        print("It seems we find the end of current page, stop crawling.")
+                        print(f"Totally scroll down {i} page, download {download_pic_count} images.")
+                        exit()
             sleep(2)
         loop.close
     
