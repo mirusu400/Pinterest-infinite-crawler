@@ -1,15 +1,17 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
-import asyncio
 from imagehelper import *
 from time import sleep
+from sys import exit
+import asyncio
+
 class Pinterest():
     def __init__(self, login, pw):
         self.piclist = []
         options = webdriver.ChromeOptions()
-        # options.add_argument('headless')
-        # options.add_argument('window-size=1920x1080')
-        # options.add_argument("disable-gpu")
+        options.add_argument('headless')
+        options.add_argument('window-size=1920x1080')
+        options.add_argument("disable-gpu")
         self.driver = webdriver.Chrome('chromedriver', chrome_options=options)
         try:
             self.driver.get("https://pinterest.com/login")

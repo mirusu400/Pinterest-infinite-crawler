@@ -10,8 +10,8 @@ An **infinite** pinterest crawler, crawl image by page.
 # Installation
 1. Download requirements
 ```
-git clone https://github.com/mirusu400/Pinterest-crawler
-cd Pinterest-crawler
+git clone https://github.com/mirusu400/Pinterest-infinite-crawler
+cd Pinterest-infinite-crawler
 pip install -r requirements.txt
 ```
 

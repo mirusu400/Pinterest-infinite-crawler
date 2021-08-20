@@ -1,5 +1,6 @@
 from selenium import webdriver
 from pinterest import Pinterest
+from sys import exit
 import yaml
 import os.path
 
@@ -8,7 +9,7 @@ if __name__ == "__main__":
     email = ""
     password = ""
     directory = ""
-    currentdir = os.path.dirname(os.path.realpath(__file__))
+    currentdir = os.getcwd()
     print(currentdir + "/chromedriver.exe")
     # Check chromedriver exists
     if not os.path.isfile(currentdir + "/chromedriver.exe"):
