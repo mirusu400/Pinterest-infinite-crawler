@@ -5,8 +5,12 @@ from imagehelper import *
 from time import sleep
 class Pinterest():
     def __init__(self, login, pw):
-        
-        self.driver = webdriver.Chrome()
+        self.piclist = []
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+        options.add_argument('window-size=1920x1080')
+        options.add_argument("disable-gpu")
+        self.driver = webdriver.Chrome('chromedriver', chrome_options=options)
         try:
             self.driver.get("https://pinterest.com/login")
             emailelem = self.driver.find_element_by_id("email")
@@ -25,25 +29,42 @@ class Pinterest():
                 break
             except:
                 sleep(1)
-                self.driver.find_element_by_xpath("//button[@type='submit']").click()
-                pass
+                try:
+                    self.driver.find_element_by_xpath("//button[@type='submit']").click()
+                except:
+                    pass
     
-    def scroll(self, n, url="https://pinterest.com/"):
+    def crawl(self, n=-1, url="https://pinterest.com/", dir="./download"):
+        global loop
+        fail_image = 0
+        if n == -1:
+            n = 999999999
+        loop = asyncio.get_event_loop()
+        
         self.driver.get(url)
         self.driver.implicitly_wait(3)
         for i in range(n):
+            download_pic_count = len(self.piclist)
+            print(f"Scroll down {i} Page, downloaded {download_pic_count} images.")
             height = self.driver.execute_script("return document.body.scrollHeight")
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             while True:
+                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                sleep(2)
                 now_height = self.driver.execute_script("return document.body.scrollHeight")
-                if now_height == height:
+
+                # If height changed
+                if now_height != height:
+                    self.download_image(dir)
                     break
+                
+            sleep(2)
+        loop.close
     
     def getdriver(self):
         return self.driver
 
     def download_image(self, dir="./download"):
-        piclist=[]
+        page_pic_list=[]
         req = self.driver.page_source
         soup = BeautifulSoup(req, 'html.parser')
         pics = soup.find_all("img")
@@ -51,11 +72,14 @@ class Pinterest():
             return 0
         for pic in pics:
             src = pic.get("src")
-
+            
             # Profile image, skip
             if "75x75_RS" in src:
                 continue
-            piclist.append(pic.get("src"))
-        fail_image = asyncio.run(download_image_host(piclist, dir))
 
+            if src not in self.piclist:
+                self.piclist.append(src)
+                page_pic_list.append(src)
+        
+        fail_image = sum(loop.run_until_complete(download_image_host(page_pic_list,dir)))
         return fail_image

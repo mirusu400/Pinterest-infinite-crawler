@@ -16,6 +16,7 @@ async def download_image(src, dir, i):
             request = requests.get(src)
             with open(savedir, 'wb') as file:
                 file.write(request.content)
+            print(f"Download {src} done!")
             break
         except Exception as e:
             print(f"{src} : Download fail! Error: {e}")

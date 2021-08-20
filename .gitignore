@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 config.yaml
 chromedriver.exe
+/download
 # C extensions
 *.so
 
