@@ -1,4 +1,4 @@
-# Pinterest-crawler
+# Pinterest-infinite-crawler
 An **infinite** pinterest crawler, crawl image by page.
 ![main](https://raw.githubusercontent.com/mirusu400/Pinterest-crawler/main/docs/welcome.gif)
 
