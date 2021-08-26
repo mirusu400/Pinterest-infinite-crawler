@@ -40,9 +40,9 @@ python main.py
 ### What is `Link to scrape` mean?
 You can select **any** pages what you want to scrape in Pinterest, not only main page. Such as:
 * [Releative-pins of one pin](https://www.pinterest.co.kr/pin/643240759283703965/)
-* [A someone's board](https://www.pinterest.co.kr/eaobrienae/croquies/)
+* [Someone's board](https://www.pinterest.co.kr/eaobrienae/croquies/)
 * [A search result](https://www.pinterest.co.kr/search/pins/?q=Github)
-or anything!
+* Or anything!
 
 ### Does it can download video?
 No, you can only download jpg images from this tool. Video is not support for now.

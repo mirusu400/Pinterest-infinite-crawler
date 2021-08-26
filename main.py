@@ -1,6 +1,7 @@
 from selenium import webdriver
 from pinterest import Pinterest
 from sys import exit
+from .chromedriver import chromedriver_download
 import yaml
 import os.path
 
@@ -10,11 +11,10 @@ if __name__ == "__main__":
     password = ""
     directory = ""
     currentdir = os.getcwd()
-    print(currentdir + "/chromedriver.exe")
     # Check chromedriver exists
     if not os.path.isfile(currentdir + "/chromedriver.exe"):
-        print("No chromedriver found! Please download it")
-        exit()
+        print("No chromedriver found! I'll download it automatically..")
+        chromedriver_download()
 
     if os.path.isfile(currentdir + "/config.yaml"):
         with open("./config.yaml", "r") as f:
