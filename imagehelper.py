@@ -14,6 +14,13 @@ async def download_image(src, dir, i):
     while True:
         try:
             request = requests.get(src)
+            # If status code is not 200, skip this image
+            # Maybe this cause 403 Error, but I don't know how to handle it
+            # assert request.status_code == 200
+            if request.status_code != 200:
+                print(f"Download {src} fail!")
+                return True
+           
             with open(savedir, 'wb') as file:
                 file.write(request.content)
             print(f"Download {src} done!")

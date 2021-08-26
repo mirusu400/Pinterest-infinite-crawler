@@ -12,6 +12,7 @@ class Pinterest():
         options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
+        options.add_argument("--log-level=3")
         self.driver = webdriver.Chrome('chromedriver', chrome_options=options)
         try:
             self.driver.get("https://pinterest.com/login")
@@ -23,7 +24,6 @@ class Pinterest():
             self.driver.find_element_by_xpath("//button[@type='submit']").click()
         except Exception as e:
             raise e
-        
         
         while True:
             try:
