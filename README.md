@@ -35,6 +35,23 @@ directory: ./download
 python main.py
 ```
 
+# Using argument
+You can also run crawler by passing argument, here are full document:
+```
+usage: main.py [-h] [-e EMAIL] [-p PASSWORD] [-d DIRECTORY] [-l LINK] [-g PAGE]
+
+optional arguments:
+  -h, --help                            show this help message and exit
+  -e EMAIL, --email EMAIL               Your Pinterest account email
+  -p PASSWORD, --password PASSWORD      Your Pinterest account password
+  -d DIRECTORY, --directory DIRECTORY   Directory you want to download
+  -l LINK, --link LINK                  Link of Pinterest which you want to scrape
+  -g PAGE, --page PAGE                  Number of pages which you want to scrape
+```
+
+**Example:**
+> main.py -e mirusu400@naver.com -p [your_password] -d download_image -l https://pinterest.com/ -g 10
+
 
 # Q & A
 ### What is `Link to scrape` mean?
