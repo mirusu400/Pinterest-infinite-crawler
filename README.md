@@ -47,11 +47,34 @@ optional arguments:
   -d DIRECTORY, --directory DIRECTORY   Directory you want to download
   -l LINK, --link LINK                  Link of Pinterest which you want to scrape
   -g PAGE, --page PAGE                  Number of pages which you want to scrape
+  -b BATCH, --batch BATCH               Enable batch mode (Please read README.md!!)
 ```
 
 **Example:**
 > main.py -e mirusu400@naver.com -p [your_password] -d download_image -l https://pinterest.com/ -g 10
 
+# Batch mode
+You can download multiple Pinterest links in a one, using batch mode
+
+1. Copy and paste `.batch.json` to `batch.json` and modify json array files.
+```
+[
+    {
+        "index": "1",
+        "link": "https://www.pinterest.co.kr/pin/362750944993136496/",
+        "dir": "./download1"
+    },
+    {
+        "index": "2",
+        "link": "https://www.pinterest.co.kr/",
+        "dir": "./download2"
+    },
+    ...
+]
+```
+
+2. Use Batch mode in command line
+> main.py -b
 
 # Q & A
 ### What is `Link to scrape` mean?
