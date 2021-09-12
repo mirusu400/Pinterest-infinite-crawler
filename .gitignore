@@ -5,6 +5,8 @@ __pycache__/
 config.yaml
 chromedriver.exe
 /download
+cookies.pkl
+batch.json
 # C extensions
 *.so
 

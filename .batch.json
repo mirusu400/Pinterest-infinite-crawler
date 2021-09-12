@@ -1,0 +1,17 @@
+[
+    {
+        "index": "1",
+        "link": "https://www.pinterest.co.kr/pin/362750944993136496/",
+        "dir": "./download1"
+    },
+    {
+        "index": "2",
+        "link": "https://www.pinterest.co.kr/search/pins/?q=%EC%9D%98%EC%83%81%20%EC%BD%94%EB%94%94&rs=trending&b_id=BFRuz8BLFkVUAAAAAAAAAABlYaIpfpFS2C4_UIhOlXYoEiVZZOKZI7mm6L7FS7n-C-OgpyoBNG0M6iAHUJGooASmCXa5pKJTAw&source_id=wf_9oXHn3jL",
+        "dir": "./download2"
+    },
+    {
+        "index": "3",
+        "link": "https://www.pinterest.co.kr/pin/362750944993136496/",
+        "dir": "./download3"
+    }
+]
