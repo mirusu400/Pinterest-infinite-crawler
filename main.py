@@ -1,8 +1,8 @@
 from selenium import webdriver
 from pinterest import Pinterest
 from sys import exit
-from chromedriver import chromedriver_download
 from exceptions import *
+import chromedriver_autoinstaller
 import json
 import yaml
 import os.path
@@ -35,9 +35,7 @@ if __name__ == "__main__":
     
 
     # Check chromedriver exists
-    if not os.path.isfile(currentdir + "/chromedriver.exe"):
-        print("No chromedriver found! I'll download it automatically..")
-        chromedriver_download()
+    chromedriver_autoinstaller.install()
 
     # Check yaml exists
     if os.path.isfile(currentdir + "/config.yaml"):
