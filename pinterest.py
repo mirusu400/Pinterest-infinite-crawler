@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from exceptions import *
 from imagehelper import *
@@ -13,12 +14,14 @@ class Pinterest():
         self.domains = [".pinterest.com", ".www.pinterest.com", "www.pinterest.com", ".www.pinterest.co.kr", "www.pinterest.co.kr"]
         self.piclist = []
         self.currentdir = os.getcwd()
+        self.user_agent = ""
         options = webdriver.ChromeOptions()
-        options.add_argument('headless')
+        # options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
         options.add_argument("--log-level=3")
-        self.driver = webdriver.Chrome('chromedriver', chrome_options=options)
+        self.driver = webdriver.Chrome(options=options)
+        self.user_agent = self.driver.execute_script("return navigator.userAgent;")
         if os.path.exists("cookies.pkl"):
             print("Loading cookies...")
             self.driver.get("https://pinterest.com")
@@ -41,7 +44,7 @@ class Pinterest():
             self.driver.get("https://pinterest.com")
             self.driver.implicitly_wait(3)
             try:
-                self.driver.find_element_by_xpath('//*[@id="HeaderContent"]')
+                self.driver.find_element(By.XPATH, '//*[@id="HeaderContent"]')
                 return
             except:
                 print("Failed to login from cookies.. login manually")
@@ -49,30 +52,38 @@ class Pinterest():
                 # pass
         try:
             self.driver.get("https://pinterest.com/login")
-            emailelem = self.driver.find_element_by_id("email")
-            passelem = self.driver.find_element_by_id("password")
+            self.driver.implicitly_wait(3)
+            for i in range(3):
+                try:
+                    self.driver.find_element(By.ID, "email")
+                    break
+                except:
+                    sleep(1)
+            emailelem = self.driver.find_element(By.ID, "email")
+            passelem = self.driver.find_element(By.ID, "password")
             emailelem.send_keys(login)
             passelem.send_keys(pw)
             sleep(1)
-            self.driver.find_element_by_xpath("//button[@type='submit']").click()
+            self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
         except Exception as e:
             raise e
         
         while True:
             try:
-                self.driver.find_element_by_xpath('//*[@id="HeaderContent"]')
+                self.driver.find_element(By.XPATH, '//*[@id="HeaderContent"]')
                 break
             except:
                 sleep(1)
                 try:
-                    self.driver.find_element_by_xpath("//button[@type='submit']").click()
+                    self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
                 except:
                     pass
         self.dump()
         return
 
     def dump(self):
-        pickle.dump(self.driver.get_cookies(), open("cookies.pkl","wb"))
+        cookies = self.driver.get_cookies()
+        pickle.dump(cookies, open("cookies.pkl","wb"))
 
     def crawl(self, dir):
         timeout = 0
