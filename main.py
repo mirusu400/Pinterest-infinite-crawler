@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # Check yaml exists
     if os.path.isfile(currentdir + "/config.yaml"):
         with open("./config.yaml", "r") as f:
-            config = yaml.load(f)
+            config = yaml.safe_load(f)
             yaml_email = config["email"]
             yaml_password = config["password"]
             yaml_directory = config["directory"]
