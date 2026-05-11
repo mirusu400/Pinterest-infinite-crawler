@@ -1,8 +1,6 @@
-from selenium import webdriver
 from pinterest import Pinterest
 from sys import exit
 from exceptions import *
-import chromedriver_autoinstaller
 import json
 import yaml
 import os.path
@@ -32,10 +30,6 @@ if __name__ == "__main__":
     yaml_email = ""
     yaml_password = ""
     yaml_directory = ""
-    
-
-    # Check chromedriver exists
-    chromedriver_autoinstaller.install()
 
     # Check yaml exists
     if os.path.isfile(currentdir + "/config.yaml"):

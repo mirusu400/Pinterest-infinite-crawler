@@ -4,10 +4,15 @@ An **infinite** pinterest crawler, crawl image by page.
 
 # Requirements
 * Python 3.7+
-* Selenium, requests, beautifulsoup4, pyyaml
-* Chrome + Chromedriver
+* Selenium 4.6+, requests, beautifulsoup4, pyyaml
+* Chrome (ChromeDriver is auto-managed by Selenium Manager)
 
 # Installation
+
+### Option A. Prebuilt binary (recommended)
+Download the binary for your OS from the latest [GitHub Release](../../releases) (Windows / macOS arm64 / macOS x86_64 / Linux). Chrome is the only prerequisite — ChromeDriver is fetched automatically at runtime by Selenium Manager.
+
+### Option B. From source
 1. Download requirements
 ```
 git clone https://github.com/mirusu400/Pinterest-infinite-crawler.git
@@ -15,13 +20,7 @@ cd Pinterest-infinite-crawler
 pip install -r requirements.txt
 ```
 
-2. Download chromedriver
-
-You **MUST** download [ChromeDriver](https://chromedriver.chromium.org/downloads) as the same version of [Chrome](chrome://settings/help).
-
-And replace it the same directory with `main.py`.
-
-3. (Optional) Set `config.yaml`
+2. (Optional) Set `config.yaml`
 
 Copy `.config.yaml` to `config.yaml` and fill your Pinterest's email, password and directorys to save images
 ```
